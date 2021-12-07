@@ -30,8 +30,8 @@ export default class ProgressBar extends Container {
 
   set({ value }) {
     this._value = value;
-    this._badge.getChildByName('value').text = `${this._label.toUpperCase()}: ${this._value}`;
     this.bar.width = (this._value * this._width) / this._max;
+    this._badge.x = this.bar.x + this.bar.width;
   }
 
   /**
@@ -83,9 +83,25 @@ export default class ProgressBar extends Container {
    */
   _createBadge() {
     this._badge = new Container();
-    const text = new Text('', { fontSize: 11, fill: 0x000000, align: 'center', fontWeight: '700' });
+
+    const text = new Text(this._label.toUpperCase(), {
+      fontSize: 11,
+      fill: 0x000000,
+      align: 'center',
+      fontWeight: '700',
+    });
     text.name = 'value';
     text.anchor.set(0.5, 1);
+    text.y = -10;
+
+    const badgeBackground = new Graphics();
+    badgeBackground.beginFill(0xFFFFFF);
+    badgeBackground.drawRect(0, 0, text.width + (15 * 2), text.height + (10 * 2));
+    badgeBackground.endFill();
+    badgeBackground.y = -badgeBackground.height;
+    badgeBackground.x = -badgeBackground.width / 2;
+    this._badge.addChild(badgeBackground);
+
     this._badge.addChild(text);
     this.addChild(this._badge);
   }
