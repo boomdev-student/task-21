@@ -1,5 +1,5 @@
-import { Container } from "pixi.js";
-import ProgressBar from "./ProgressBar";
+import { Container } from 'pixi.js';
+import ProgressBar from './ProgressBar';
 
 export default class Stats extends Container {
   constructor({ data = [] } = {}) {
@@ -22,7 +22,7 @@ export default class Stats extends Container {
     const progressBar = new ProgressBar({
       label,
       width,
-      value
+      value,
     });
     progressBar.y = this.children.length * progressBar.height;
     this.addChild(progressBar);

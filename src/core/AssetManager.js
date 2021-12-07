@@ -124,15 +124,13 @@ class AssetManager {
    * @param {<Array.{ image: String, data: Object }>} list 
    */
   prepareSpritesheets(list) {
-    const promises = list.map((item) => {
-      return new Promise((resolve) => {
-        const sheet = new Spritesheet(Texture.from(item.texture), item.data);
-        sheet.parse(() => {
-          this._spritesheets[item.texture] = sheet;
-          resolve(sheet);
-        });
+    const promises = list.map((item) => new Promise((resolve) => {
+      const sheet = new Spritesheet(Texture.from(item.texture), item.data);
+      sheet.parse(() => {
+        this._spritesheets[item.texture] = sheet;
+        resolve(sheet);
       });
-    });
+    }));
     
     return Promise.all(promises);
   }

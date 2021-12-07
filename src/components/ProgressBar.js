@@ -1,5 +1,5 @@
-import { Container, Graphics, Text } from "pixi.js";
-import gsap from "gsap";
+import { Container, Graphics, Text } from 'pixi.js';
+import gsap from 'gsap';
 
 export default class ProgressBar extends Container {
   /**
@@ -63,7 +63,7 @@ export default class ProgressBar extends Container {
     const text = new Text(`${this._label.toUpperCase()}: ${this._value}`, { fontSize: 11, fill: 0x000000, align: 'center', fontWeight: '700' });
     text.name = 'value';
     text.anchor.set(0.5, 1);
-    this._badge.addChild(text)
+    this._badge.addChild(text);
     this.addChild(this._badge);
   }
 }
