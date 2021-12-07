@@ -5,8 +5,8 @@ export default class Rocket3 extends Rocket {
     super({
       textureName: 'rocket3',
       acceleration: 30,
-      handling: 5,
-      speed: 70,
+      handling: 10,
+      speed: 30,
       name: 'rocket-3',
     });
 

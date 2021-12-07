@@ -7,6 +7,9 @@ export default class Rocket extends Container {
     super();
 
     this.name = name;
+    this.acceleration = acceleration;
+    this.handling = handling;
+    this.speed = speed;
 
     this._fire = new Fire();
 

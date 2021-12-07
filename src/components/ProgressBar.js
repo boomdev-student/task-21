@@ -1,5 +1,5 @@
 import { Container, Graphics, Text } from 'pixi.js';
-import gsap from 'gsap';
+// import gsap from 'gsap';
 
 export default class ProgressBar extends Container {
   /**
@@ -10,7 +10,6 @@ export default class ProgressBar extends Container {
    */
   constructor({ label, max = 100, value = 0, width = 500 } = {}) {
     super();
-
     this.name = `progressbar-${label}`;
 
     this._label = label;
@@ -23,6 +22,7 @@ export default class ProgressBar extends Container {
     this._badge = null;
 
     this._createBackground();
+    this._createBar();
     this._createBadge();
 
     this.set({ value });
@@ -31,6 +31,7 @@ export default class ProgressBar extends Container {
   set({ value }) {
     this._value = value;
     this._badge.getChildByName('value').text = `${this._label.toUpperCase()}: ${this._value}`;
+    this.bar.width = (this._value * this._width) / this._max;
   }
 
   /**
@@ -40,6 +41,15 @@ export default class ProgressBar extends Container {
    */
   get background() {
     return this._background;
+  }
+
+  /**
+   * @readonly
+   * @memberof ProgressBar
+   * @returns {PIXI.Graphics}
+   */
+  get bar() {
+    return this._bar;
   }
 
   /**
@@ -58,9 +68,22 @@ export default class ProgressBar extends Container {
   /**
    * @private
    */
+  _createBar() {
+    this._bar = new Graphics();
+    this.bar.beginFill(0x000000);
+    this.bar.drawRect(0, 0, (this._value * this._width) / this._max, 25);
+    this.bar.endFill();
+    this.bar.alpha = 0.1;
+    this.bar.x = this._background.x;
+    this.addChild(this.bar);
+  }
+
+  /**
+   * @private
+   */
   _createBadge() {
     this._badge = new Container();
-    const text = new Text(`${this._label.toUpperCase()}: ${this._value}`, { fontSize: 11, fill: 0x000000, align: 'center', fontWeight: '700' });
+    const text = new Text('', { fontSize: 11, fill: 0x000000, align: 'center', fontWeight: '700' });
     text.name = 'value';
     text.anchor.set(0.5, 1);
     this._badge.addChild(text);

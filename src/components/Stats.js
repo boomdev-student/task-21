@@ -24,7 +24,7 @@ export default class Stats extends Container {
       width,
       value,
     });
-    progressBar.y = this.children.length * progressBar.height;
+    progressBar.y = this.children.length * (progressBar.height + 15);
     this.addChild(progressBar);
 
     this._items[key] = progressBar;

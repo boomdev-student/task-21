@@ -15,10 +15,10 @@ export default class Play extends Scene {
     this.addChild(footer);
 
     this._rockets = [
-      new Rocket4(),
-      new Rocket3(),
-      new Rocket2(),
       new Rocket1(),
+      new Rocket2(),
+      new Rocket3(),
+      new Rocket4(),
     ];
     this._active = null;
 
